@@ -144,7 +144,7 @@ LOCAL void syslog_classify(MolochSession_t *session, const unsigned char *UNUSED
     }
 }
 /******************************************************************************/
-LOCAL void stun_classify(MolochSession_t *session, const unsigned char *data, int len, int UNUSED(which), void *UNUSED(uw))
+/*LOCAL void stun_classify(MolochSession_t *session, const unsigned char *data, int len, int UNUSED(which), void *UNUSED(uw))
 {
     if (len < 20 || 20 + data[3] != len)
         return;
@@ -160,12 +160,15 @@ LOCAL void stun_classify(MolochSession_t *session, const unsigned char *data, in
     }
 
 }
+*/
 /******************************************************************************/
+/*
 LOCAL void stun_rsp_classify(MolochSession_t *session, const unsigned char *data, int len, int UNUSED(which), void *UNUSED(uw))
 {
     if (moloch_memstr((const char *)data+7, len-7, "STUN", 4))
         moloch_session_add_protocol(session, "stun");
 }
+*/
 /******************************************************************************/
 LOCAL void flap_classify(MolochSession_t *session, const unsigned char *data, int len, int UNUSED(which), void *UNUSED(uw))
 {
@@ -449,11 +452,11 @@ void moloch_parser_init()
     PARSERS_CLASSIFY_BOTH("syslog", NULL, 0, (unsigned char*)"<8", 2, syslog_classify);
     PARSERS_CLASSIFY_BOTH("syslog", NULL, 0, (unsigned char*)"<9", 2, syslog_classify);
 
-    PARSERS_CLASSIFY_BOTH("stun", NULL, 0, (unsigned char*)"RSP/", 4, stun_rsp_classify);
+    //PARSERS_CLASSIFY_BOTH("stun", NULL, 0, (unsigned char*)"RSP/", 4, stun_rsp_classify);
 
-    CLASSIFY_UDP("stun", 0, "\x00\x01\x00", stun_classify);
-    CLASSIFY_UDP("stun", 0, "\x00\x03\x00", stun_classify);
-    CLASSIFY_UDP("stun", 0, "\x01\x01\x00", stun_classify);
+    //CLASSIFY_UDP("stun", 0, "\x00\x01\x00", stun_classify);
+    //CLASSIFY_UDP("stun", 0, "\x00\x03\x00", stun_classify);
+    //CLASSIFY_UDP("stun", 0, "\x01\x01\x00", stun_classify);
 
     CLASSIFY_TCP("flap", 0, "\x2a\x01", flap_classify);
 
