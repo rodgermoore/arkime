@@ -1,0 +1,6 @@
+if (session.stun)
+  div.sessionDetailMeta.bold stun
+  dl.sessionDetailMeta
+    +arrayList(session.stun, "type", "Type", "stun.type")
+    +arrayList(session.stun, "xorip", "XOR Mapped IP", "stun.xorip")
+    +arrayList(session.stun, "xorport", "XOR Mapped Port", "stun.xorport")
